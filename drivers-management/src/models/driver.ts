@@ -1,9 +1,5 @@
 import { Schema, model } from "mongoose"
-
-type location = {
-    type: string,
-    coordinates: [number]
-}
+import { location } from "../misc/types"
 
 interface IDriver {
     id: string,
@@ -32,5 +28,8 @@ const driverSchema = new Schema<IDriver>({
 
 const Driver = model<IDriver>('Driver', driverSchema);
 
-export default Driver; 
+export { 
+    Driver,
+    IDriver
+} 
 

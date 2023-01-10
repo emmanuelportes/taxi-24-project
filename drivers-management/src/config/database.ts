@@ -1,11 +1,25 @@
-import mongoose, { Connection } from "mongoose";
+import mongoose from "mongoose";
 
-export async function getConnection():Promise<void> {
-    try {
-       const connect = await mongoose.connect(process.env.MONGO_URI || "");
-       console.log(connect.connection.host);
-    } catch(err) {
-        console.log(err);
-        process.exit(1)
+export default class Database {
+
+    private static instance: Database;
+
+    private constructor() { }
+
+    public static getInstance(): Database {
+        
+        if(!this.instance) 
+            this.instance = new Database();
+        
+        return this.instance
     }
+
+    public getConnection( uri: string ): void {
+        mongoose.connect(uri).catch( err => {
+            console.log(err);
+            throw new Error(err.message || "database refused to connect");
+        });   
+    }
+
 }
+
