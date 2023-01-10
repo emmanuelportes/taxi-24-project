@@ -1,25 +1,23 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
 
 export default class Database {
 
     private static instance: Database;
 
-    private constructor() { }
+    private constructor(uri:string) {
+        mongoose.connect(uri, { maxPoolSize: process.env.MAX_POOL_SIZE, minPoolSize: process.env.MIN_POOL_SIZE } as ConnectOptions ).catch(err => {
+            console.log(err);
+            throw new Error(err.message || "database refused to connect");
+        })
+    }
 
-    public static getInstance(): Database {
-        
+    public static getInstance(uri: string): Database {
         if(!this.instance) 
-            this.instance = new Database();
+            this.instance = new Database(uri);
         
         return this.instance
     }
 
-    public getConnection( uri: string ): void {
-        mongoose.connect(uri).catch( err => {
-            console.log(err);
-            throw new Error(err.message || "database refused to connect");
-        });   
-    }
-
 }
+
 

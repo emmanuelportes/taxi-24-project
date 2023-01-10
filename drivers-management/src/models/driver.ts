@@ -26,7 +26,11 @@ const driverSchema = new Schema<IDriver>({
     }
 });
 
-const Driver = model<IDriver>('Driver', driverSchema);
+driverSchema.pre("save", async (next) =>{
+    
+} )
+
+const Driver = model('Driver', driverSchema)
 
 export { 
     Driver,

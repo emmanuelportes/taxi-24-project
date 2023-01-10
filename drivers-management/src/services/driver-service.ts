@@ -4,10 +4,8 @@ import { IDriver, Driver } from "../models/driver";
 
 export default class DriverService {
 
-    private database: Database;
-
-    constructor(database: Database) {
-        this.database = Database.getInstance();
+    constructor() {
+        Database.getInstance(process.env.MONGO_URI || "");
     }
 
     public async getAllDrivers() : Promise<Array<IDriver>> {
@@ -19,7 +17,11 @@ export default class DriverService {
         return driver != null? driver : {};
     }
 
-    
+    public async getNearestDrivers(): Promise<Array<IDriver | {}>>{
+        return  [{}];
+    }
+
 
 
 }
+
