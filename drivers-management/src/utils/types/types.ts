@@ -3,6 +3,10 @@ type location = {
     coordinates: [number]
 }
 
+type coordinates = Array<number>
+
 export {
-    location
+    location,
+    coordinates
 }
+

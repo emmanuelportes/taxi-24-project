@@ -1,19 +1,21 @@
 import { Schema, model } from "mongoose"
-import { location } from "../misc/types"
+import { location } from "../utils/types/types"
 
 interface IDriver {
-    id: string,
+    id: object,
     name: string,
     lastname: string,
+    gender: string,
     isAvailable: boolean,
-    location : location,
+    location : location
 }
 
 const driverSchema = new Schema<IDriver>({
-    id: { type: String, required: true, unique: true },
+    id: { type: Object, required: true, unique: true },
     name: { type: String, required: true },
     lastname: { type: String, required: true },
     isAvailable: { type: Boolean, required: true },
+    gender: { type: String, required: true},
     location: { 
         type: {
             type: String,
@@ -26,9 +28,7 @@ const driverSchema = new Schema<IDriver>({
     }
 });
 
-driverSchema.pre("save", async (next) =>{
-    
-} )
+driverSchema.index({location: '2dsphere'});
 
 const Driver = model('Driver', driverSchema)
 

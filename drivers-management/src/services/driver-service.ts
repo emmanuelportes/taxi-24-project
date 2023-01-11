@@ -1,11 +1,11 @@
-import Database from "../config/database";
+import Database from "../utils/config/database";
 import { IDriver, Driver } from "../models/driver";
-
+import { coordinates } from "../utils/types/types";
 
 export default class DriverService {
 
     constructor() {
-        Database.getInstance(process.env.MONGO_URI || "");
+        Database.getInstance(process.env.MONGO_URI || '');
     }
 
     public async getAllDrivers() : Promise<Array<IDriver>> {
@@ -17,11 +17,19 @@ export default class DriverService {
         return driver != null? driver : {};
     }
 
-    public async getNearestDrivers(): Promise<Array<IDriver | {}>>{
-        return  [{}];
+    public async getNearestDrivers(coordinates: coordinates): Promise<Array<IDriver>> {
+        return await Driver.find({
+            location: {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: coordinates
+                    },
+                    $maxDistance: 3000,
+                    $minDistance: 0
+                }
+            }
+        });
     }
-
-
-
 }
 

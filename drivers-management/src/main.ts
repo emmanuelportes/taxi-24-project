@@ -1,10 +1,12 @@
+import * as dotenv from 'dotenv';
+dotenv.config({path: './src/configure.env'});
 import  express from "express";
 import morgan from "morgan";
 import { router } from "./routes/drivers-routes";
-import * as dotenv from 'dotenv';
-dotenv.config({path:'./configure.env'});
 
 const app = express();
+
+console.log(process.cwd());
 
 app.use(morgan('tiny'));
 app.use(express.json());

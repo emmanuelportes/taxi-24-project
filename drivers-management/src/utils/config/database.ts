@@ -6,7 +6,6 @@ export default class Database {
 
     private constructor(uri:string) {
         mongoose.connect(uri, { maxPoolSize: process.env.MAX_POOL_SIZE, minPoolSize: process.env.MIN_POOL_SIZE } as ConnectOptions ).catch(err => {
-            console.log(err);
             throw new Error(err.message || "database refused to connect");
         })
     }
