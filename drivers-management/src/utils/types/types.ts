@@ -1,12 +1,18 @@
+type coordinates = Array<number>
+
 type location = {
     type: string,
     coordinates: [number]
 }
 
-type coordinates = Array<number>
+type schedule = {
+    open: number,
+    close: number
+}
 
 export {
     location,
-    coordinates
+    coordinates,
+    schedule
 }
 
