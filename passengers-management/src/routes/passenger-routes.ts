@@ -22,7 +22,6 @@ router.get('/passengers/:id', async(req: Request, res: Response)=> {
         passenger: passenger
     });
 });
-
 export {
     router
 }
