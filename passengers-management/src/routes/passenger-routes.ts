@@ -11,7 +11,17 @@ router.get("/passengers", async(req: Request, res: Response)=> {
         passengers: result,
         count: result.length
     });
-})
+});
+
+router.get('/passengers/:id', async(req: Request, res: Response)=> {
+    const id = req.params.id;
+    const passenger = await controller.getPassengerById(id);
+
+    res.status(200).json({
+        success: true,
+        passenger: passenger
+    });
+});
 
 export {
     router

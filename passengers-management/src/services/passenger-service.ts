@@ -11,6 +11,9 @@ export default class PassengerService {
         return await Passengers.find({}).sort({ name: 1 });
     }
 
-    
+    public async getPassengerById(id:string): Promise<Passenger | {}> {
+        const passenger = await Passengers.findById({_id:id});
+        return passenger ? passenger  : {};
+    }
 
 }
