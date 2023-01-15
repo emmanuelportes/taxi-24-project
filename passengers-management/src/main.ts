@@ -12,7 +12,6 @@ app.use(express.urlencoded({extended: true}))
 
 app.use('/passengers-management/', router)
 
-
 app.listen(process.env.PORT, ()=>{
     console.log(`server running on port: ${process.env.PORT}`)
 });

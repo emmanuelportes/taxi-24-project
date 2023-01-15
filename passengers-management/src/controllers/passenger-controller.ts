@@ -1,5 +1,6 @@
 import PassengerService from "../services/passenger-service";
 import Passenger from "../models/passenger";
+import { IDriver } from "../utils/types/types";
 
 
 export default class PassangerController {
@@ -18,6 +19,9 @@ export default class PassangerController {
         return await this.passengerService.getPassengerById(id);
     }
 
-    
+    public async getNearestDrivers( location: string): Promise<Array<IDriver | {}>> {
+        const result = await this.passengerService.getNearestDrivers(location.trim());
+        return result.data.drivers;
+    }
 
 }
