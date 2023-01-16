@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-dotenv.config({path: './src/configure.env'});
+dotenv.config({path: './configure.env'});
 import  express from "express";
 import morgan from "morgan";
 import { router } from "./routes/drivers-routes";
