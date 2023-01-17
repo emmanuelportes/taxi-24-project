@@ -7,8 +7,12 @@ lib-cov
 *.pid
 *.gz
 *.swp
+<<<<<<< HEAD
 
 package-lock.json
+=======
+*.env
+>>>>>>> 2fce74541167f03a11e24f8c200dd5046553f6f9
 
 pids
 logs
